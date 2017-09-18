@@ -20,18 +20,24 @@ public class Cliente {
             ObjectInputStream resultado = new ObjectInputStream(cliente.getInputStream());
             ObjectOutputStream numeros = new ObjectOutputStream(cliente.getOutputStream());
             
-            System.out.print("Digite o primeiro valor:\n");
-            num1 = teclado.nextInt();
-            teclado.nextLine();
-            System.out.print("Digite o segundo valor:\n");
-            num2 = teclado.nextInt();
+            while(!teclado.equals("sair")){
+                
+                System.out.print("Digite o primeiro valor:\n");
+                num1 = teclado.nextInt();
+                teclado.nextLine();
+                System.out.print("Digite o segundo valor:\n");
+                num2 = teclado.nextInt();
+
+                numeros.writeInt(num1);
+                numeros.writeInt(num2);
+                numeros.flush();
+
+                int soma = resultado.readInt();
+                System.out.println("Resultado da soma: " + soma + "\n");
+                            
+            }
             
-            numeros.writeInt(num1);
-            numeros.writeInt(num2);
-            numeros.flush();
             
-            int soma = resultado.readInt();
-            System.out.println("Resultado da soma: " + soma );
             
             resultado.close();
             numeros.close();

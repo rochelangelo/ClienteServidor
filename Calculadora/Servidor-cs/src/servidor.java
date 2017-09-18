@@ -9,6 +9,7 @@ public class servidor {
 	public static void main(String args[]) throws IOException{
 		
             int num1, num2, total;
+            Scanner sc = new Scanner(System.in);
             
             ServerSocket servidor = new ServerSocket(1234);
             System.out.println("---Servidor aberto a conexão!---" + "\n   Aguardando conexão");
@@ -17,14 +18,16 @@ public class servidor {
                 
             ObjectOutputStream resultado = new ObjectOutputStream(cliente.getOutputStream());
             ObjectInputStream numeros = new ObjectInputStream(cliente.getInputStream());
-                
-            num1 = numeros.readInt();
-            num2 = numeros.readInt();
-               
-            total = num1 + num2;
             
-            resultado.writeInt(total);
-            resultado.flush();
+            while(!sc.equals("sair")){
+                num1 = numeros.readInt();
+                num2 = numeros.readInt();
+
+                total = num1 + num2;
+
+                resultado.writeInt(total);
+                resultado.flush();
+            }
             
             resultado.close();
             numeros.close();
